@@ -1,16 +1,29 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useEffect, useState } from "react";
+import { getAllProjects, type Project } from "@/data/projects";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import SelectedWork from "@/components/SelectedWork";
+import About from "@/components/About";
+import Process from "@/components/Process";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+export default function Index() {
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    getAllProjects().then(setProjects);
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="bg-background min-h-screen">
+      <Navbar />
+      <Hero />
+      <SelectedWork projects={projects} />
+      <About />
+      <Process />
+      <Contact />
+      <Footer />
     </div>
   );
-};
-
-const Index = PlaceholderIndex;
-
-export default Index;
+}
