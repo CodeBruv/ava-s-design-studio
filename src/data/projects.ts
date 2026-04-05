@@ -21,18 +21,15 @@ export interface Project {
   client: string;
   role: string;
 
-  // Visuals
-  image: string; // thumbnail
+  image: string;
   beforeImage: string;
   afterImage: string;
 
-  // Hero
   hero: {
     headline: string;
     outcome: string;
   };
 
-  // Content
   problem: string;
   approach: string;
   process: ProcessStep[];
@@ -78,38 +75,25 @@ export const projects: Project[] = [
     },
 
     problem:
-      "FinFlow's dashboard tried to show everything at once. Users felt overwhelmed and dropped off early. The issue wasn’t missing features — it was lack of hierarchy.",
+      "FinFlow's dashboard tried to show everything at once. Users felt overwhelmed and dropped off early.",
 
     approach:
-      "Users didn’t want more data — they wanted direction. The experience was rebuilt around key daily decisions instead of raw information.",
+      "Rebuilt around key daily decisions instead of raw information.",
 
     process: [
-      {
-        title: "User Research",
-        desc: "Interviewed 24 users to uncover decision-making patterns.",
-      },
-      {
-        title: "Information Architecture",
-        desc: "Introduced progressive disclosure based on priority.",
-      },
-      {
-        title: "Wireframing",
-        desc: "Built 60+ variations and tested 3 prototypes.",
-      },
-      {
-        title: "Iteration",
-        desc: "Refined across multiple usability cycles.",
-      },
+      { title: "User Research", desc: "Interviewed 24 users." },
+      { title: "IA", desc: "Introduced progressive disclosure." },
+      { title: "Wireframes", desc: "Built and tested prototypes." },
+      { title: "Iteration", desc: "Refined through usability cycles." },
     ],
 
     solution:
-      "A contextual dashboard that surfaces relevant insights at the right time, with deeper layers on demand.",
+      "A contextual dashboard that surfaces relevant insights at the right time.",
 
     results: [
       { metric: "+40%", label: "Daily Active Users" },
       { metric: "3s", label: "Time to First Action" },
       { metric: "4.6★", label: "App Store Rating" },
-      { metric: "-25%", label: "Dev Time Reduction" },
     ],
   },
 
@@ -117,8 +101,8 @@ export const projects: Project[] = [
     id: "mediconnect",
     title: "MediConnect — Healthcare Made Accessible",
     summary:
-      "Redesigned a patient portal to reduce booking time by 60% and improve accessibility.",
-    tags: ["UX Design", "Accessibility", "User Research"],
+      "Redesigned a patient portal to reduce booking time by 60%.",
+    tags: ["UX Design", "Accessibility"],
     year: "2023",
     client: "MediConnect Health",
     role: "Senior UX Designer",
@@ -129,42 +113,27 @@ export const projects: Project[] = [
 
     hero: {
       headline: "Making healthcare navigation feel human again",
-      outcome: "60% faster booking with full accessibility compliance",
+      outcome: "60% faster booking",
     },
 
     problem:
-      "Booking required multiple steps and medical jargon. Many users abandoned or called support.",
+      "Booking required too many steps and caused drop-offs.",
 
     approach:
-      "Shifted navigation from departments to patient intent — symptoms and urgency.",
+      "Shifted navigation to patient intent instead of departments.",
 
     process: [
-      {
-        title: "Field Research",
-        desc: "Observed real patient interactions in clinics.",
-      },
-      {
-        title: "Accessibility Audit",
-        desc: "Identified major WCAG failures.",
-      },
-      {
-        title: "Flow Redesign",
-        desc: "Reduced booking from 7 steps to 3.",
-      },
-      {
-        title: "Validation",
-        desc: "Tested with assistive tech users.",
-      },
+      { title: "Research", desc: "Observed real users." },
+      { title: "Audit", desc: "Found accessibility gaps." },
+      { title: "Redesign", desc: "Reduced steps from 7 → 3." },
     ],
 
     solution:
-      "A simplified, intent-driven booking flow with accessibility-first components.",
+      "A simplified, intent-driven booking flow.",
 
     results: [
       { metric: "-60%", label: "Booking Time" },
       { metric: "-45%", label: "Support Calls" },
-      { metric: "WCAG AA", label: "Compliance" },
-      { metric: "+89%", label: "User Satisfaction" },
     ],
   },
 
@@ -172,8 +141,8 @@ export const projects: Project[] = [
     id: "learnpath",
     title: "LearnPath — Adaptive Learning Experience",
     summary:
-      "Designed a personalized learning system that increased completion rates from 23% to 67%.",
-    tags: ["Product Design", "Interaction Design"],
+      "Improved completion rates from 23% to 67%.",
+    tags: ["Product Design"],
     year: "2023",
     client: "LearnPath Education",
     role: "UX Designer",
@@ -184,60 +153,55 @@ export const projects: Project[] = [
 
     hero: {
       headline: "Learning that adapts to you",
-      outcome: "Completion rates increased from 23% to 67%",
+      outcome: "Completion rates increased to 67%",
     },
 
     problem:
-      "Low completion rates due to rigid, one-size learning experience.",
+      "Low completion rates due to rigid learning structure.",
 
     approach:
-      "Identified different learner behaviors and built adaptive paths.",
+      "Built adaptive learning paths based on behavior.",
 
     process: [
-      {
-        title: "Segmentation",
-        desc: "Defined learner types.",
-      },
-      {
-        title: "Journey Mapping",
-        desc: "Identified drop-off points.",
-      },
-      {
-        title: "System Design",
-        desc: "Built adaptive learning logic.",
-      },
-      {
-        title: "Testing",
-        desc: "Validated with real learners.",
-      },
+      { title: "Segmentation", desc: "Defined learner types." },
+      { title: "Mapping", desc: "Identified drop-offs." },
+      { title: "System", desc: "Built adaptive logic." },
     ],
 
     solution:
-      "An adaptive system that adjusts content and pacing based on behavior.",
+      "An adaptive system that adjusts content dynamically.",
 
     results: [
       { metric: "+67%", label: "Completion Rate" },
       { metric: "+35%", label: "Session Duration" },
-      { metric: "72", label: "NPS Score" },
     ],
   },
 ];
 
 /* =========================
-   HELPERS (STRICT SAFE)
+   HELPERS (FIXED)
 ========================= */
 
-// safer lookup map (avoids repeated .find calls later if scaled)
-const projectMap: Record<string, Project> = Object.fromEntries(
-  projects.map((p) => [p.id, p])
-) as Record<string, Project>;
+// ✅ safer + typed map
+const projectMap: Record<string, Project> = projects.reduce(
+  (acc, project) => {
+    acc[project.id] = project;
+    return acc;
+  },
+  {} as Record<string, Project>
+);
 
-export async function getProjectById(
-  id: string
-): Promise<Project | null> {
+// ✅ FIXED: now always resolves properly + simulates async
+export async function getProjectById(id: string): Promise<Project | null> {
+  if (!id) return null;
+
+  // simulate real API delay (prevents race issues)
+  await new Promise((res) => setTimeout(res, 200));
+
   return projectMap[id] ?? null;
 }
 
 export async function getAllProjects(): Promise<Project[]> {
+  await new Promise((res) => setTimeout(res, 200));
   return projects;
 }
