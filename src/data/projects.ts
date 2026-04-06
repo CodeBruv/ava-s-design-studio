@@ -47,7 +47,7 @@ import finflowAfter from "@/assets/finflow-after.png";
 import mediconnectBefore from "@/assets/mediconnect-before.png";
 import mediconnectAfter from "@/assets/mediconnect-after.png";
 
-import learnpathBefore from "@/assets/learnpath-before.jpg";
+import learnpathBefore from "@/assets/learnpath-before.png";
 import learnpathAfter from "@/assets/learnpath-after.png";
 
 /* =========================
