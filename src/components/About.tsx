@@ -21,7 +21,7 @@ export default function About() {
             </h2>
             <div className="space-y-5 font-body text-muted-foreground leading-relaxed">
               <p>
-                I'm Ava — a UX designer who believes the best products feel obvious
+                I'm Ava, a UX designer who believes the best products feel obvious
                 in hindsight. I spend most of my time in the space between user needs
                 and business goals, finding solutions that serve both.
               </p>

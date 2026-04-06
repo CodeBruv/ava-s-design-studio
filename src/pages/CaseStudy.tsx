@@ -105,6 +105,46 @@ export default function CaseStudy() {
         </div>
       </section>
 
+      {/* BEFORE / AFTER */}
+      <section className="pb-24">
+        <div className="container mx-auto max-w-5xl px-6 md:px-10">
+
+          <h2 className="text-2xl font-semibold mb-10">
+            Transformation
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-10">
+
+            {/* BEFORE */}
+            <div className="group">
+              <p className="text-sm text-muted-foreground mb-3">Before</p>
+
+              <div className="rounded-2xl overflow-hidden border border-border bg-muted">
+                <img
+                  src={project.beforeImage}
+                  alt="Before design"
+                  className="w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                />
+              </div>
+            </div>
+
+            {/* AFTER */}
+            <div className="group">
+              <p className="text-sm text-muted-foreground mb-3">After</p>
+
+              <div className="rounded-2xl overflow-hidden border border-border bg-muted">
+                <img
+                  src={project.afterImage}
+                  alt="After design"
+                  className="w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                />
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* CONTENT */}
       <section className="pb-32">
         <div className="container mx-auto max-w-3xl space-y-20">

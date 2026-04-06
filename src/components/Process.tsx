@@ -5,7 +5,7 @@ const steps = [
     number: "01",
     title: "Discover",
     description:
-      "Understand the problem space through research, stakeholder interviews, and data analysis. No assumptions — just clarity.",
+      "Understand the problem space through research, stakeholder interviews, and data analysis. No assumptions, just clarity.",
   },
   {
     number: "02",
